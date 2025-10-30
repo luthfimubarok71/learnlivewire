@@ -1,4 +1,4 @@
-<div class="w-1/3 my-10">
+<div wire:poll.keep-alive class="w-1/3 my-10">
     <div class="mx-auto mb-6">
         <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">Users List</h2>
     </div>
