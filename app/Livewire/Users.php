@@ -3,18 +3,24 @@
 namespace App\Livewire;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 
 class Users extends Component
 {
+    public $name;
+    public $email;
+    public $password;
 
-    public function createUser()
+    public function createNewUser()
     {
         User::create([
-            'name' => 'User ' . rand(1, 1000),
-            'email' => 'user' . rand(1, 1000) . '@example.com',
-            'password' => bcrypt('password'),
+            'name' => $this->name,
+            'email' => $this->email,
+            'password' => Hash::make($this->password),
         ]);
+
+        $this->reset();
     }
 
     public function render()
