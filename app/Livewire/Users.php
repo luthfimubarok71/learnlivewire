@@ -6,10 +6,13 @@ use App\Models\User;
 use Livewire\Component;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Attributes\Validate;
+use Livewire\Features\SupportFileUploads\WithFileUploads;
+use Livewire\WithPagination;
 
 class Users extends Component
 {
-    use \Livewire\WithFileUploads;
+    use WithFileUploads;
+    use WithPagination;
 
     #[Validate('required|min:3')]
     public $name;
@@ -46,7 +49,7 @@ class Users extends Component
     {
         return view('livewire.users', [
             'title' => 'Users Page',
-            'users' => User::all(),
+            'users' => User::latest()->paginate(6),
         ]);
     }
 }
