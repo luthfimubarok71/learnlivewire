@@ -9,6 +9,8 @@ use Livewire\Attributes\Validate;
 
 class Users extends Component
 {
+    use \Livewire\WithFileUploads;
+
     #[Validate('required|min:3')]
     public $name;
 
@@ -18,13 +20,22 @@ class Users extends Component
     #[Validate('required|min:3')]
     public $password;
 
+    #[Validate('image|max:5120')]
+    public $avatar;
+
     public function createNewUser()
     {
-        $this->validate();
+        $validated = $this->validate();
+
+        if ($this->avatar) {
+            $validated['avatar'] = $this->avatar->store('avatars', 'public');
+        }
+
         User::create([
             'name' => $this->name,
             'email' => $this->email,
             'password' => Hash::make($this->password),
+            'avatar' => $validated['avatar']
         ]);
 
         $this->reset();
