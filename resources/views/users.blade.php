@@ -16,7 +16,10 @@
 </head>
 
 <body>
-    @livewire('users')
+    <div class="flex justify-center gap-15">
+        @livewire('user-register-form')
+        @livewire('users-list')
+    </div>
 </body>
 
 </html>
