@@ -26,6 +26,17 @@ class Users extends Component
     #[Validate('image|max:5120')]
     public $avatar;
 
+    public $query = '';
+
+    public function updatingQuery()
+    {
+        $this->resetPage();
+    }
+    public function search()
+    {
+        $this->resetPage();
+    }
+
     public function createNewUser()
     {
         $validated = $this->validate();
@@ -49,7 +60,9 @@ class Users extends Component
     {
         return view('livewire.users', [
             'title' => 'Users Page',
-            'users' => User::latest()->paginate(6),
+            'users' => User::latest()
+                ->where('name', 'like', '%' . $this->query . '%')
+                ->paginate(6),
         ]);
     }
 }
