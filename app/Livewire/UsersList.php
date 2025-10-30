@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\User;
+use Livewire\Attributes\Computed;
 use Livewire\Component;
 use Livewire\Attributes\On;
 use Livewire\WithPagination;
@@ -28,14 +29,11 @@ class UsersList extends Component
         return view('livewire.placeholders.skeleton-list');
     }
 
-    public function render()
+    #[Computed()]
+    public function Users()
     {
-        sleep(1); // Simulate delay for demonstration purposes
-        return view('livewire.users-list', [
-            'title' => 'Users Page',
-            'users' => User::latest()
-                ->where('name', 'like', '%' . $this->query . '%')
-                ->paginate(6),
-        ]);
+        return User::latest()
+            ->where('name', 'like', '%' . $this->query . '%')
+            ->paginate(6);
     }
 }
