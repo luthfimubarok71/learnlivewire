@@ -47,8 +47,11 @@
                             aria-current="{{ $currentRoute == 'about' ? 'page' : false }}">About</a>
                     </li>
                     <li>
-                        <a href="#"
-                            class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0">Contact</a>
+                        <a href="contacts"
+                            class="block py-2 px-3 {{ $currentRoute == 'contacts'
+                                ? 'text-white bg-blue-700 rounded-sm md:bg-transparent md:text-blue-700 md:p-0'
+                                : 'text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0' }}"
+                            aria-current="{{ $currentRoute == 'contacts' ? 'page' : false }}">Contact</a>
                     </li>
                 </ul>
             </div>
